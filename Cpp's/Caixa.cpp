@@ -8,7 +8,7 @@ Caixa::Caixa(double = 0.0){
     if(Caixa.is_open()){
         pair <int,int> auxiliar;
         while(!Caixa.eof()){
-            Caixa>>auxiliar.frist;
+            Caixa>>auxiliar.first;
             if(Caixa.eof())
                 break;
             Caixa>>auxiliar.second;
