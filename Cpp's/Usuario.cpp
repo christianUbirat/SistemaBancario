@@ -10,7 +10,7 @@ Usuario::Usuario(string nome, string senha, int numero_conta , double debito, do
     this -> privilegio = privilegio;
 }
 
-//Funï¿½ï¿½es de atribuï¿½ï¿½o
+//Funções de atribução
 void Usuario::set_nome(string nome){
     this -> nome = nome;
 }
@@ -35,7 +35,7 @@ void Usuario::set_privilegio(bool privilegio){
     this -> privilegio = privilegio;
 }
 
-//Funï¿½ï¿½es de retorno
+//Funções de retorno
 string Usuario::set_nome(void)const{
     return nome;
 }
@@ -62,13 +62,13 @@ bool Usuario::set_privilegio(void)const{
 
 // Funcionalidades da conta
 void Usuario::mostrar_estrato(void)const{
-    //Funï¿½ï¿½o time : para mostrar a hora da impressï¿½o do estrato
+    //Função time : para mostrar a hora da impressão do estrato
     //Iomanip
     cout<<setprecision(2)<<fixed;
-    cout<<"---------"<<"Usuï¿½rio :"<<get_numero_conta()<<"---------"<<endl
-        <<"Crï¿½ditos negativados : "<<get_debito()<<"  R$."<<endl
+    cout<<"---------"<<"Usuário :"<<get_numero_conta()<<"---------"<<endl
+        <<"Créditos negativados : "<<get_debito()<<"  R$."<<endl
         <<"Saldo                : "<<get_credito()<<" R$."<<endl;
-        (get_privilegio) ? cout<<"Usuï¿½rio Private."<<endl; : cout<<"Usuï¿½rio Comum."<<endl;
+        (get_privilegio) ? cout<<"Usuário Private."<<endl; : cout<<"Usuário Comum."<<endl;
     for(int indice = 0 ; indice < size.historico ; indice++)
         cout<<"Foi realizado um"<<historico[indice]<<endl;
 }
