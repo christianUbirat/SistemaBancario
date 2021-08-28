@@ -1,4 +1,4 @@
- #ifndef USUARIO_H
+#ifndef USUARIO_H
 #define USUARIO_H
 
 class Usuario:public Usuario{
@@ -7,10 +7,11 @@ private :
 	int numero_conta;
 	double debito,credito;
 	bool privilegio;
+	vector<string>historico;
 public :
 	// Construtor
     Usuario(string = "", string = "", int = 0, double = 0.0, double 0.0, boll = false);
-    
+
     // Metodos Set
     void set_nome(string);
     void set_senha(string);
@@ -31,6 +32,7 @@ public :
     void mostrar_estrato(void)const;
     void depositar(double);
     void sacar(double);
+    void atualizar_historico(int)const;
 
     // Destrutor
     ~Usuario(void);
