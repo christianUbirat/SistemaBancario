@@ -7,7 +7,8 @@ class Caixa{
 private :
     double Qtd_dinheiro;
     //Biblioteca ultillit
-    vector<pair<notas,Qtd>>Notas;
+    //Pair<valor da nota, Qtd de nota>
+    vector<pair<int,int>>Notas;
 public :
     // Construtor
     Caixa(double = 0.0);
@@ -23,3 +24,4 @@ public :
 
 #endif
 #endif
+
