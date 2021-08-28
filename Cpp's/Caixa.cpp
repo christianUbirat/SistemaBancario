@@ -42,10 +42,8 @@ Caixa::~Caixa(){
     ofstream Caixa("Dinheiros.txt", ios::trunc);
     Caixa<<qtd_dinheiro;
     if(Caixa.is_open()){
-        for(int indice = 0 ; indice < notas.size() ; indice++){
-            Caixa<<notas[indice].first
-                <<notas[indice].second;
-        }
+        for(int indice = 0 ; indice < notas.size() ; indice++)
+            Caixa<<notas[indice].first<<endl<<notas[indice].second<<endl;
     }
     Caixa.close();
 }
