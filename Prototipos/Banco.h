@@ -18,6 +18,8 @@ public :
     // Get 
     string get_senha_administrador()const;
     void menu(void);
+
+    // Funcionalidades do caixa
     void escolha(int);
     void cadastro(void);
     void transferir(void);
