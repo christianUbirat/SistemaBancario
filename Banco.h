@@ -15,7 +15,7 @@ public :
     // Set
     void set_senha_administrador(string);
 
-    // Get plei
+    // Get 
     string get_senha_administrador()const;
     void menu(void);
     void escolha(int);
