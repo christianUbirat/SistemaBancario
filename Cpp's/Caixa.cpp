@@ -6,11 +6,13 @@ Caixa::Caixa(double = 0.0){
     Caixa.open("Dinheiros.txt" , ios::in);
     Caixa>>Qtd_dinheiro;
     if(Caixa.is_open()){
+        pair <int,int> auxiliar;
         while(!Caixa.eof()){
-            Caixa>>Notas.frist;
+            Caixa>>auxiliar.frist;
             if(Caixa.eof())
                 break;
-            Caixa>>Notas.second;
+            Caixa>>auxiliar.second;
+            Notas.push_back(auxiliar);
         }
     }
     Caixa.close();
@@ -31,7 +33,7 @@ void Caixa::gerenciar(void){
         else if(opcao == "2")
             remover();
         else
-            cout<<"Opção inválida ,por favor tente novamente ."endl;
+            cout<<"OpÃ§Ã£o invÃ¡lida ,por favor tente novamente ."endl;
     }while(opcao != "3");
 }
 
