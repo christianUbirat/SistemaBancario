@@ -4,7 +4,7 @@
 Caixa::Caixa(double = 0.0){
     ifstream Caixa;
     Caixa.open("Dinheiros.txt" , ios::in);
-    Caixa>>Qtd_dinheiro;
+    Caixa>>qtd_dinheiro;
     if(Caixa.is_open()){
         pair <int,int> auxiliar;
         while(!Caixa.eof()){
@@ -12,7 +12,7 @@ Caixa::Caixa(double = 0.0){
             if(Caixa.eof())
                 break;
             Caixa>>auxiliar.second;
-            Notas.push_back(auxiliar);
+            notas.push_back(auxiliar);
         }
     }
     Caixa.close();
@@ -40,11 +40,11 @@ void Caixa::gerenciar(void){
 // Construtor da classe Caixa
 Caixa::~Caixa(){
     ofstream Caixa("Dinheiros.txt", ios::trunc);
-    Caixa<<Qtd_dinheiro;
+    Caixa<<qtd_dinheiro;
     if(Caixa.is_open()){
-        for(int indice = 0 ; indice < Notas.size() ; indice++){
-            Caixa<<nota[i].first
-                <<nota[i].second;
+        for(int indice = 0 ; indice < notas.size() ; indice++){
+            Caixa<<notas[indice].first
+                <<notas[indice].second;
         }
     }
     Caixa.close();
