@@ -10,7 +10,7 @@ Usuario::Usuario(string nome, string senha, int numero_conta , double debito, do
     this -> privilegio = privilegio;
 }
 
-//Fun��es de atribu��o
+//Funções de atribução
 void Usuario::set_nome(string nome){
     this -> nome = nome;
 }
@@ -35,40 +35,40 @@ void Usuario::set_privilegio(bool privilegio){
     this -> privilegio = privilegio;
 }
 
-//Fun��es de retorno
-string Usuario::set_nome(void)const{
+//Funções de retorno
+string Usuario::get_nome(void)const{
     return nome;
 }
 
-string Usuario::set_senha(void)const{
+string Usuario::get_senha(void)const{
     return senha;
 }
 
-int Usuario::set_numero_conta(void)const{
+int Usuario::get_numero_conta(void)const{
     return numero_conta;
 }
 
-double Usuario::set_debito(void)const{
+double Usuario::get_debito(void)const{
     return debito;
 }
 
-double Usuario::set_credito(void)const{
+double Usuario::get_credito(void)const{
     return credito;
 }
 
-bool Usuario::set_privilegio(void)const{
+bool Usuario::get_privilegio(void)const{
     return privilegio;
 }
 
 // Funcionalidades da conta
 void Usuario::mostrar_estrato(void)const{
-    //Fun��o time : para mostrar a hora da impress�o do estrato
+    //Função time : para mostrar a hora da impressão do estrato
     //Iomanip
     cout<<setprecision(2)<<fixed;
-    cout<<"---------"<<"Usu�rio :"<<get_numero_conta()<<"---------"<<endl
-        <<"Cr�ditos negativados : "<<get_debito()<<"  R$."<<endl
+    cout<<"---------"<<"Usuário :"<<get_numero_conta()<<"---------"<<endl
+        <<"Créditos negativados : "<<get_debito()<<"  R$."<<endl
         <<"Saldo                : "<<get_credito()<<" R$."<<endl;
-        (get_privilegio) ? cout<<"Usu�rio Private."<<endl; : cout<<"Usu�rio Comum."<<endl;
+        (get_privilegio()) ? cout<<"Usuário Private."<<endl : cout<<"Usuário Comum."<<endl;
     for(int indice = 0 ; indice < historico.size() ; indice++)
         cout<<"Foi realizado um"<<historico[indice]<<endl;
 }
