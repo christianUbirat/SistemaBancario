@@ -6,20 +6,20 @@
 
 class Banco{
 private :
+    int cliente;
     vector<UsuarioPrivate>contas;
     string senha_administrador;
 public :
     // Construtor
     Banco(void);
-    
+
     // Set
     void set_senha_administrador(string);
 
-    // Get 
+    // Get
     string get_senha_administrador()const;
     void menu(void);
-
-    // Funcionalidades do caixa
+    bool login(void);
     void escolha(int);
     void cadastro(void);
     void transferir(void);
