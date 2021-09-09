@@ -5,13 +5,13 @@
 
 class Caixa{
 private :
-    double qtd_dinheiro;
+    double Qtd_dinheiro;
     //Biblioteca ultillit
     //Pair<valor da nota, Qtd de nota>
     vector<pair<int,int>>notas;
 public :
     // Construtor
-    Caixa(double = 0.0);
+    Caixa();
 
     // Funcionalidades do caixa
     void gerenciar(void);
@@ -23,5 +23,3 @@ public :
 };
 
 #endif
-#endif
-
