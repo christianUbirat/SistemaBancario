@@ -1,38 +1,40 @@
 #ifndef USUARIO_H
 #define USUARIO_H
 
+#include <string>
+#include <vector>
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
 class Usuario{
 private :
 	string nome, senha;
 	int numero_conta;
-	double debito,credito;
-	bool privilegio;
+	float debito,credito;
 	vector<string>historico;
 public :
-	// Construtor
-	//Caminhao(int = 0, string = "", double = 0.0 ,string = "" ,string = "", int = 0, int = 0, int = 0);
-    Usuario(string = "",string = "", int = 0, double = 0.0, double = 0.0, bool = false);
+    Usuario(string = "",string = "", int = 0, float = 0.0, float = 0.0);
 
-    // Metodos Set
+    // Set's
     void set_nome(string);
     void set_senha(string);
     void set_numero_conta(int);
-    void set_debito(double);
-    void set_credito(double);
-    void set_privilegio(bool);
+    void set_debito(float);
+    void set_credito(float);
 
     // Metodos Get
     string get_nome(void)const;
     string get_senha(void)const;
     int get_numero_conta(void)const;
-    double get_debito(void)const;
-    double get_credito(void)const;
-    bool get_privilegio(void)const;
+    float get_debito(void)const;
+    float get_credito(void)const;
 
     // Funcionalidades da conta
     void mostrar_estrato(void)const;
-    void depositar(double);
-    void sacar(double);
+    void depositar(float);
+    void sacar(float);
     void atualizar_historico(int)const;
 
     // Destrutor

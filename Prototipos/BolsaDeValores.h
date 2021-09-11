@@ -1,15 +1,40 @@
 #ifndef BOLSADEVALORES_H
 #define BOLSADEVALORES_H
 
-#include "Banco.cpp"
+#include <vector>
+#include <string>
+
+//#include "Banco.cpp"
+#include "Acao.h"
+#include "RendaFixa.h"
+
+using namespace std;
 
 class BolsaDeValores{
 private :
-    double acoes, renda_fixa, liquidez;
+    vector<Acao> acoes;
+    vector<Titulo> titulos;
 public :
-    BolsaDeValores(double = 0.0, double = 0.0, double = 0.0);
-    ~BolsaDeValores(void);
+    BolsaDeValores();      // Construtor
+    
+    // Get's
+    /*
+    vector<Acao> getAcoes()const;
+    vector<Titulo> getTitulos()const;
+    */
+
+    // Sets's
+    void setAcoes(vector<Acao>);
+    void setTitulos(vector<Titulo>);
+    
+    void mostrarAcoes();
+    void mostrarTitulos();
+    void mostrarAtivos();
+
+    void salvarAcoes();
+    void salvarTitulos();
+
+    ~BolsaDeValores();      // Destrutor
 };
 
-#endif
 #endif

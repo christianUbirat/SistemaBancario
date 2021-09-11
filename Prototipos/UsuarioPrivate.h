@@ -1,28 +1,41 @@
 #ifndef USUARIOPRIVATE_H
 #define USUARIOPRIVATE_H
 
+#include "Usuario.h"
+#include "Acao.h"
+#include "RendaFixa.h"
+
+#include <fstream>
+#include <string>
+#include <vector>
+#include <iostream>
+#include <sstream>
+
+using namespace std;
+
+// Moeda será outra classe derivada de ativo
+struct Moeda{
+    string nome;
+    string ticker;
+    float conversao;
+};
+
 class UsuarioPrivate:public Usuario{
 private :
-	double investimentos, saldo_moeda_estrangeira;
+    pair<vector<Acao>, vector<int> > acoes_compradas;
+    pair<vector<Titulo>, int> titulos_comprados;
+    pair<vector<Moeda>, int> outras_moedas_compradas;
 public :
 	// Construtor
-    UsuarioPrivate(string = "",string = "", int = 0, double = 0.0, double = 0.0, bool = false, double = 0.0, double = 0.0);
-
-    // Metodos set
-    void set_investimentos(double);
-    void set_saldo_moeda_estrangeira(double);
-
-    // Metodos get
-    double get_investimentos(void)const;
-    double get_saldo_moeda_estrangeira(void)const;
+    UsuarioPrivate(string = "",string = "", int = 0, float = 0.0, float = 0.0);
 
     // Funcionalidades do usuario private
-    void investir(double, int);
-    void retirar_envestimento(string, double);
-    void converter_modera(double, string);
+    void comprar_acao(string, int);
+    void comprar_titulo(string, int);
+    void comprar_moeda(string, int);
 
-    //impressão
-    void mostrar_evestimentos(void)const;
+    Moeda converter_moeda(Moeda);
+    void mostrar_investimentos()const;
 
     // Destrutor
     ~UsuarioPrivate(void);
