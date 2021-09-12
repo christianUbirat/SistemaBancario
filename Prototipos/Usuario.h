@@ -28,8 +28,6 @@ public :
 
     // Funcionalidades da conta
     void mostrar_estrato(void)const;
-    void depositar(float);
-    void sacar(float);
     void atualizar_historico(int)const;
 
     // Destrutor
