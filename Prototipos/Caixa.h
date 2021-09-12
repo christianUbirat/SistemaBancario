@@ -9,17 +9,17 @@ private :
     int saldo;
 
 public :
-    // Construtor(False padrão,True private)
+    // Construtor(False padr�o,True private)
     Caixa(int);
     // Funcionalidades do caixa
-    // Função da adimistração
+    // Fun��o da adimistra��o
     void gerenciar(void);
     void abastecer(void);
     void remover(void);
     //Processos
     int proceso_abastecer(void);
     int proceso_remocao(void);
-    // Função do's usuários
+    // Fun��o do's usu�rios
     int deposito(void);
     int saque(void);
     void contabilizar(void);

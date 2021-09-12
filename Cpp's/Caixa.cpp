@@ -34,7 +34,7 @@ void Caixa::gerenciar(void){
         else if(opcao == "2")
             remover();
         else
-            cout<<"Opção inválida ,por favor tente novamente ."<<endl;
+            cout<<"Op��o inv�lida ,por favor tente novamente ."<<endl;
     }while(opcao != "3");
 }
 
@@ -67,7 +67,7 @@ int Caixa::proceso_abastecer(void){
        ciclo = valor*quantidade;
        (ciclo + acumulado > montante) ? invalido = true : invalido = false;
        if(invalido){
-        cout << "Os valores inseridos não condizem com a quantia que deseja abastecer" << endl
+        cout << "Os valores inseridos n�o condizem com a quantia que deseja abastecer" << endl
              << "Por favor tente novamente"                                            << endl;
        }else{
            acumulado += ciclo;
@@ -98,7 +98,7 @@ void Caixa::remover(void){
     grana = proceso_remocao();
     (Qtd_dinheiro - grana < 0) ? invalido = true : invalido = false;
     if(invalido)
-        cout<< "O banco não possui esse valor : " << grana << " entretanto possui : "<<Qtd_dinheiro <<" R$"<< endl
+        cout<< "O banco n�o possui esse valor : " << grana << " entretanto possui : "<<Qtd_dinheiro <<" R$"<< endl
             << "Por favor tente novamente :)"                                                              << endl;
     else{
         contabilizar();
@@ -115,7 +115,7 @@ int Caixa::saque(void){
     grana = proceso_remocao();
     (saldo -= grana < 0) ? invalido = true : invalido = false;
     if(invalido)
-        cout<<"Crédito insuficiente, por favor tente novamente ou consulte o extrato da conta :)"<<endl;
+        cout<<"Cr�dito insuficiente, por favor tente novamente ou consulte o extrato da conta :)"<<endl;
     }while(invalido);
     return saldo -= grana;
 }

@@ -1,7 +1,7 @@
 #include "Usuario.h"
 
 //Construtor da Classe Usuario
-Usuario::Usuario(string nome, string senha, int numero_conta , float debito, float credito){
+Usuario::Usuario(string nome, string senha, int numero_conta , double debito, double credito){
     this -> nome = nome;
     this -> senha = senha;
     this -> numero_conta = numero_conta;
@@ -9,7 +9,7 @@ Usuario::Usuario(string nome, string senha, int numero_conta , float debito, flo
     this -> credito = credito;
 }
 
-//Funções de atribução
+//Fun��es de atribu��o
 void Usuario::set_nome(string nome){
     this -> nome = nome;
 }
@@ -22,15 +22,15 @@ void Usuario::set_numero_conta(int numero_conta){
     this -> numero_conta = numero_conta;
 }
 
-void Usuario::set_debito(float debito){
+void Usuario::set_debito(double debito){
     this -> debito = debito;
 }
 
-void Usuario::set_credito(float credito){
+void Usuario::set_credito(double credito){
     this -> credito = credito;
 }
 
-//Funções de retorno
+//Fun��es de retorno
 string Usuario::get_nome(void)const{
     return nome;
 }
@@ -43,27 +43,31 @@ int Usuario::get_numero_conta(void)const{
     return numero_conta;
 }
 
-float Usuario::get_debito(void)const{
+double Usuario::get_debito(void)const{
     return debito;
 }
 
-float Usuario::get_credito(void)const{
+double Usuario::get_credito(void)const{
     return credito;
 }
 
 // Funcionalidades da conta
 void Usuario::mostrar_estrato(void)const{
-    //Função time : para mostrar a hora da impressão do estrato
-    //Iomanip
+    //Fun��o time : para mostrar a hora da impress�o do estrato
     cout<<setprecision(2)<<fixed;
-    cout<<"---------"<<"Usuário :"<<get_numero_conta()<<"---------"<<endl
-        <<"Dívida  : "<<get_debito()<<"  R$."<<endl
-        <<"Saldo   : "<<get_credito()<<" R$."<<endl;
+    cout<<"---------"<<"Usu�rio : "<<get_numero_conta()<<"---------"<<endl
+        <<"Cr�ditos negativados : "<<get_debito()<<"  R$."<<endl
+        <<"Saldo                : "<<get_credito()<<" R$."<<endl;
     for(int indice = 0 ; indice < historico.size() ; indice++)
-        cout << historico[indice] << endl;
+        cout<<"Foi realizado um : "<<historico[indice]<<endl;
+}
+
+void Usuario::atualizar_historico( string acao ){
+    historico.push_back( acao );
 }
 
 //Destrutor
 Usuario::~Usuario(void){
 };
+
 
