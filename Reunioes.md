@@ -22,17 +22,17 @@ Lucas Martins inicia os protótipos.
 Reunião dos integrantes para finalizar os protótipos.
 
 # 03/09:
-Lucas começar alguns arquivos .cpp
+Lucas começar alguns arquivos .cpp.
 
 # 06/09:
-Christian escreve os casos de uso e discute as novas metas do projeto com Lucas
+Christian escreve os casos de uso e discute as novas metas do projeto com Lucas.
 
 # 08/09:
-Christian e Lucas se reúnem e mudam algumas questões conceituais sobre o projeto, bem parte do código já pronto
+Christian e Lucas se reúnem e mudam algumas questões conceituais sobre o projeto, bem como parte do código já pronto.
 
 # 10/09:
-Christian e Lucas resolvem todos problemas conceituais e terminam os códigos .cpp
+Christian e Lucas resolvem todos problemas conceituais e terminam os códigos .cpp.
 
 # 11/09:
-Christian e Lucas adiantam parte do código (questões extras)
+Christian e Lucas adiantam parte do código (questões extras).
 
