@@ -1,9 +1,12 @@
 #ifndef ACAO_H
 #define ACAO_H
 
-#include "AtivoFinanceiro.h"
+#include <string>
+#include <vector>
 
 using namespace std;
+
+#include "AtivoFinanceiro.cpp"
 
 class Acao: public Ativo{
 private :
@@ -12,11 +15,11 @@ private :
     vector<float> historico;
 public :
     Acao(string, string, float, int);        //Construtor
-    
+
     // Get's
     float getVol()const;
     int getRisco()const;
-    
+
     // Set's
     void setVol(float);
     void setRisco(int);

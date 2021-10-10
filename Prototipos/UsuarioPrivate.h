@@ -1,17 +1,14 @@
 #ifndef USUARIOPRIVATE_H
 #define USUARIOPRIVATE_H
 
-#include "Usuario.h"
-#include "Acao.h"
-#include "RendaFixa.h"
-
-#include <fstream>
-#include <string>
 #include <vector>
-#include <iostream>
-#include <sstream>
+#include <string>
 
 using namespace std;
+
+#include "Usuario.cpp"
+#include "Acao.cpp"
+#include "RendaFixa.cpp"
 
 // Moeda será outra classe derivada de ativo
 struct Moeda{
@@ -23,16 +20,19 @@ struct Moeda{
 class UsuarioPrivate:public Usuario{
 private :
     pair<vector<Acao>, vector<int> > acoes_compradas;
-    pair<vector<Titulo>, int> titulos_comprados;
+    pair<vector<Titulo>, vector<int> > titulos_comprados;
     pair<vector<Moeda>, int> outras_moedas_compradas;
 public :
 	// Construtor
-    UsuarioPrivate(string = "",string = "", int = 0, float = 0.0, float = 0.0);
+    UsuarioPrivate(string = "",string = "", int = 0, int = 0, int = 0);
 
-    // Funcionalidades do usuario private
-    void comprar_acao(string, int);
-    void comprar_titulo(string, int);
-    void comprar_moeda(string, int);
+    // Get
+    pair<vector<Acao>, vector<int> > get_acoes();
+    pair<vector<Titulo>, vector<int> > get_titulos();
+
+    // Set
+    void set_acoes(Acao, int);
+    void set_titulo(Titulo, int);
 
     Moeda converter_moeda(Moeda);
     void mostrar_investimentos()const;

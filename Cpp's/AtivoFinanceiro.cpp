@@ -1,13 +1,5 @@
 #include "AtivoFinanceiro.h"
 
-#include <iostream>
-#include <algorithm>
-#include <iomanip>
-#include <fstream>
-#include <sstream>
-
-using namespace std;
-
 Ativo::Ativo(string nome, string ticker, float preco){
     this->nome = nome;
     this->ticker = ticker;
