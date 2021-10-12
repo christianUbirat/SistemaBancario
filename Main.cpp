@@ -4,10 +4,20 @@
 #include <algorithm>
 #include <iomanip>
 #include <fstream>
-// Essa biblioteca não funciona no VS Code, utilizar getchar()
-// #include <conio.h>
 
-// Os system("cls") são system("clear") no MacOS
+/* Sistema de Transação Bancária */
+
+/* Grupo 11:
+    Christian Ubiratan
+    Lucas Martins
+
+    Monitor: Francinildo
+*/
+
+// Para acessar os detalhes do programa, acesse:
+// https://github.com/christianUbirat/SistemaBancario
+
+// Os system("cls") é system("clear") no MacOS (trocar conforme necessário)
 
 using namespace std;
 
@@ -17,41 +27,44 @@ using namespace std;
 #include "BolsaDeValores.cpp"
 
 int main(){
-
-    // Se atentar aos buffers (para não pular os cin's)
+    system("clear");
     setlocale(LC_ALL, "Portuguese");
     //Criar Banco
     Banco opt_bank;
-
-    //--------------------------------------------------------------------
-    // Criar bolsa de valores
     BolsaDeValores opt_bolsa;
-    /*
-    Acao A1("Petrobrás", "PETR3", 25, 4);
-    Acao A2("TradersClub", "TRAD3", 8, 5);
-    Acao A3("Taesa", "TAEE11", 35, 1);
-    Acao A4("ABC", "ABC12", 22, 1);
 
-    vector <Acao> acoes;
-    acoes.push_back(A1);
-    acoes.push_back(A2);
-    acoes.push_back(A3);
-    acoes.push_back(A4);
+    string ativos;
+    cout << "Já existe um arquivo com as ações e títulos da bolsa de valores?" << endl
+         << "(1) - Sim" << endl
+         << "(2) - Não" << endl; 
+    cin >> ativos;
 
-    opt_bolsa.setAcoes(acoes);
+    if(ativos == "2"){
+        // Criar ativos para a bolsa de valores
+        Acao A1("Petrobrás", "PETR3", 25, 4);
+        Acao A2("TradersClub", "TRAD3", 8, 5);
+        Acao A3("Taesa", "TAEE11", 35, 1);
+        Acao A4("UFCG", "UFCG4", 22, 1);
 
-    Titulo T1("Títulos Optimum Bank", "OPMB11 ", 10000, 1);
-    Titulo T2("ETF CDB's", "CDBB11", 5000, 3);
-    Titulo T3("ETF Taxa de Juros", "FIXA11", 15000, 5);
+        vector <Acao> acoes;
+        acoes.push_back(A1);
+        acoes.push_back(A2);
+        acoes.push_back(A3);
+        acoes.push_back(A4);
 
-    vector <Titulo> titulos;
-    titulos.push_back(T1);
-    titulos.push_back(T2);
-    titulos.push_back(T3);
+        opt_bolsa.setAcoes(acoes);
 
-    opt_bolsa.setTitulos(titulos);
-    */
-    //--------------------------------------------------------------------
+        Titulo T1("Títulos Optimum Bank", "OPMB11 ", 10000, 1);
+        Titulo T2("ETF CDB's", "CDBB11", 5000, 3);
+        Titulo T3("ETF Taxa de Juros", "FIXA11", 15000, 5);
+
+        vector <Titulo> titulos;
+        titulos.push_back(T1);
+        titulos.push_back(T2);
+        titulos.push_back(T3);
+
+        opt_bolsa.setTitulos(titulos);
+    }
 
     string cadastro, privilegio;
     pair <int , int> dados;
@@ -146,7 +159,7 @@ int main(){
                         if( dados.second == -1 )
                             cout << "Gerente não possui método na Bolsa de Valores " << endl;
                         else
-                            opt_bolsa.comprar_ativo(dados.second);
+                            opt_bolsa.menu(dados.second);
                     }else if(menu == "4"){
                         //system("cls");
                         system("clear");

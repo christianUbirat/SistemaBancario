@@ -149,12 +149,17 @@ void Banco::menu(){
 pair <int, int> Banco::login(){
     bool ok = false;
     int conta;
-    string senha;
+    string senha, conta_temp;
     pair <int, int> dados;
     do{
-        cout << "--------       LOGIN       --------" << endl
-             << "Número da conta: ";
-        cin >> conta;
+        do{
+            //system("cls");
+            system("clear");
+            cout << "--------       LOGIN       --------" << endl
+                 << "Número da conta: ";
+            cin >> conta_temp;
+            conta = erro(conta_temp);
+        }while(conta == -1);
         cout << "Senha: ";
         cin >> senha;
         // Verificando se os dados digitados estão no vetor de usuários padrão
@@ -409,21 +414,31 @@ void Banco::validacao_transferir(){
     cout << "Transferência realizada com sucesso !" << endl;
 }
 
+//Após verificar se é possivel realizar a transferência, ela é feita
 void Banco::transferir( int local2, bool tipo2, float qtd ){
     if( tipo == 0 ){
         usuarios_private[local].set_credito(usuarios_private[local].get_credito() - qtd);
-        usuarios_private[local].atualizar_historico(" realizou uma transferência ");
+        usuarios_private[local].atualizar_historico(" Realizou uma transferência .");
+        usuarios_private[local].mostrar_estrato();
     }else{
         usuarios[local].set_credito(usuarios[local].get_credito() - qtd);
-        usuarios[local].atualizar_historico(" realizou uma transferência ");
+        usuarios[local].atualizar_historico(" Realizou uma transferência .");
+        usuarios[local].mostrar_estrato();
     }
     if(tipo2){
         usuarios_private[local2].set_credito(usuarios_private[local2].get_credito() + qtd);
-        usuarios_private[local2].atualizar_historico(" recebeu uma transferência ");
+        usuarios_private[local2].atualizar_historico(" Recebeu uma transferência .");
+        usuarios_private[local2].mostrar_estrato();
     }else{
         usuarios[local2].set_credito(usuarios[local2].get_credito() + qtd);
-        usuarios[local2].atualizar_historico(" recebeu uma transferência ");
+        usuarios[local2].atualizar_historico("Recebeu uma transferência.");
+        usuarios[local2].mostrar_estrato();
     }
+    cout << "Pressione qualquer tecla para continuar";
+    cin.get();
+    cin.get();
+    system("clear");
+    //system("cls");
 }
 
 // Buscar por um usuário private e retornar a sua posição no vetor
@@ -444,6 +459,7 @@ int Banco::procurar(int numero)const{
     return -1;
 }
 
+//Aqui fazemos uma exibição do extrato do usuário
 void Banco::historico(void){
     atualizar();
     //system("cls");

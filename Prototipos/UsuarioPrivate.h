@@ -33,6 +33,8 @@ public :
     // Set
     void set_acoes(Acao, int);
     void set_titulo(Titulo, int);
+    void set_qtd_acoes(string, int);
+    void set_qtd_titulo(string, int);
 
     Moeda converter_moeda(Moeda);
     void mostrar_investimentos()const;

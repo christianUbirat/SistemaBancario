@@ -16,11 +16,15 @@ using namespace std;
 
 class BolsaDeValores{
 private :
+    // Vetor com as ações
     vector<Acao> acoes;
+    // Vetor com os títulos
     vector<Titulo> titulos;
-    vector<UsuarioPrivate> usuarios_private;    // Vetor com todos os usuários private
+    // Vetor com todos os usuários private
+    vector<UsuarioPrivate> usuarios_private;    
 public :
-    BolsaDeValores();      // Construtor
+    // Construtor
+    BolsaDeValores();      
 
     // Get's
     vector<Acao> getAcoes()const;
@@ -30,25 +34,26 @@ public :
     void setAcoes(vector<Acao>);
     void setTitulos(vector<Titulo>);
 
-    void mostrarAcoes();
-    void mostrarTitulos();
-    void mostrarAtivos();
-    // comprar_acao(indice no vetor, ticker, quantidade)
-    void comprar_ativo(int);
+    // Menu principal da classe
+    void menu(int);
 
+    // Manipulação de arquivos
     void salvarAcoes();
     void salvarTitulos();
-
     void atualizar_usuarios();
     void salvar_usuarios();
     void atualizar_ativos();
     void att_ativos_usuarios();
     void salvar_ativos_usr();
     
-
+    // Outras funções
+    void mostrarAcoes();
+    void mostrarTitulos();
+    void mostrarAtivos();
     int encontrar_acao(string);
     int encontrar_titulo(string);
-
+    
+    // Destrutor
     ~BolsaDeValores();      // Destrutor
 };
 

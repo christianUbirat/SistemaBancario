@@ -2,12 +2,14 @@
 
 using namespace std;
 
+// Construtor
 BolsaDeValores::BolsaDeValores(){
     atualizar_ativos();
     atualizar_usuarios();
     att_ativos_usuarios();
 }
 
+// Classe para atualizar os ativos da bolsa conforme os arquivos
 void BolsaDeValores::atualizar_ativos(){
     acoes.clear();
     titulos.clear();
@@ -21,6 +23,7 @@ void BolsaDeValores::atualizar_ativos(){
     int risco;
 
     if(arquivo_acoes.is_open()){
+        // Para cada linha do arquivo de ações, haverá uma ação com seus atributos
         while (getline(arquivo_acoes, linha)){
             stringstream ss(linha);
             getline(ss, nome, ',');
@@ -31,6 +34,7 @@ void BolsaDeValores::atualizar_ativos(){
             risco = stoi(risco_temp);
 
             Acao acao(nome, ticker, preco, risco);
+            // Adicionar ação no vetor
             acoes.push_back(acao);
         }
     }
@@ -89,14 +93,19 @@ void BolsaDeValores::atualizar_usuarios(void){
     att_ativos_usuarios();
 }
 
+// Metodo para atualizar a quantidade de ativos de um usuario
 void BolsaDeValores::att_ativos_usuarios(){
-    ifstream arquivo_usuarios("ativos_de_usuarios.txt");
+    // Atualizar as ações
+    ifstream acoes_usuarios("acoes_de_usuarios.txt");
     // Variaveis auxiliares
     string nome, ticker, qtd_, indice_, linha;
     int qtd, indice;
 
-    if(arquivo_usuarios.is_open()){
-        while (getline(arquivo_usuarios, linha)){
+    // No arquivo cada linha representa um usuario
+    // O primeiro numero é a posição do usuario no vetor
+    // Depois, cada par de número é uma ação e sua respectiva quantidade
+    if(acoes_usuarios.is_open()){
+        while (getline(acoes_usuarios, linha)){
             stringstream ss(linha);
 
             bool stop = false;
@@ -109,7 +118,6 @@ void BolsaDeValores::att_ativos_usuarios(){
                     }
                     getline(ss, indice_, ',');
                     indice = stoi(indice_);
-                    //cout << "indice: " << indice << endl;
                     cont = 1;
                 }
                 if(cont == 1){
@@ -118,7 +126,6 @@ void BolsaDeValores::att_ativos_usuarios(){
                     }
                     if(!stop){
                         getline(ss, ticker, ',');
-                        //cout << "ticker: " << ticker << endl;
                         cont = 2;
                     }
                 }
@@ -129,18 +136,65 @@ void BolsaDeValores::att_ativos_usuarios(){
                     if(!stop){
                         getline(ss, qtd_, ',');
                         qtd = stoi(qtd_);
-                        //cout << "qtd: " << qtd << endl;
                         usuarios_private[indice].set_acoes(acoes[encontrar_acao(ticker)], qtd);
-                        //cout << usuarios_private[indice].get_acoes().first[0].getNome() << endl;
                         cont = 1;
                     }
                 }
             }
         }
     }
-    arquivo_usuarios.close();
+    acoes_usuarios.close();
+
+    // A lógica com os titulos é a mesma das ações
+    // Atualizar os titulos
+    ifstream titulos_usuarios("titulos_de_usuarios.txt");
+    // Variaveis auxiliares
+    string nome2, ticker2, qtd_2, indice_2, linha2;
+    int qtd2, indice2;
+
+    if(titulos_usuarios.is_open()){
+        while (getline(titulos_usuarios, linha2)){
+            stringstream ss(linha2);
+
+            bool stop = false;
+            int cont = 0;
+            while(!stop){
+                if(cont == 0){
+                    if(ss.eof()){
+                        stop = true;
+                        break;
+                    }
+                    getline(ss, indice_2, ',');
+                    indice2 = stoi(indice_2);
+                    cont = 1;
+                }
+                if(cont == 1){
+                    if(ss.eof()){
+                        stop = true;
+                    }
+                    if(!stop){
+                        getline(ss, ticker2, ',');
+                        cont = 2;
+                    }
+                }
+                if(cont == 2){
+                    if(ss.eof()){
+                        stop = true;
+                    }
+                    if(!stop){
+                        getline(ss, qtd_2, ',');
+                        qtd = stoi(qtd_2);
+                        usuarios_private[indice2].set_titulo(titulos[encontrar_titulo(ticker2)], qtd2);
+                        cont = 1;
+                    }
+                }
+            }
+        }
+    }
+    titulos_usuarios.close();
 }
 
+// Metodo para salvar os usuarios no arquivo
 void BolsaDeValores::salvar_usuarios(void){
     ofstream Usuario_private("Usuario_private.txt");
     if(Usuario_private.is_open()){
@@ -205,10 +259,13 @@ void BolsaDeValores::setTitulos(vector<Titulo> novosTitulos){
     salvarTitulos();
 }
 
-void BolsaDeValores::comprar_ativo(int indice){
+// Esse é o menu principal da classe Bolsa de Valores
+// Por meio desse método o usuário interage com a classe 
+void BolsaDeValores::menu(int indice){
     // Garantindo que o vetor de ações esteja atualizado
     atualizar_ativos();
     atualizar_usuarios();
+
     string escolha;
     do{
         cout << usuarios_private[indice].get_nome() << " o seu saldo é: " << usuarios_private[indice].get_credito() << endl
@@ -223,7 +280,7 @@ void BolsaDeValores::comprar_ativo(int indice){
         if(escolha == "1"){
             string ticker;
             int qtd;
-            bool sucesso = false;
+            bool sucesso = false, possui_acao = false, ativo_existe = false;
 
             system("clear");
             cout << "Digite o ticker da ação que você deseja comprar: ";
@@ -231,10 +288,22 @@ void BolsaDeValores::comprar_ativo(int indice){
             cout << "Digite quantas ações você deseja comprar: ";
             cin >> qtd;
             for(int i=0; i<acoes.size(); i++){
+                // Procurando ação com o ticker digitado
                 if(ticker == acoes[i].getTicker()){
+                    ativo_existe = true;
+                    // Se o usário possuir crédito sufiente para comprar a ação desejada
                     if(usuarios_private[indice].get_credito() >= qtd * acoes[i].getPreco()){
-                        usuarios_private[indice].set_acoes(acoes[i], qtd);
-                        usuarios_private[indice].set_credito(usuarios_private[indice].get_credito() - acoes[i].getPreco()*qtd);
+                        // Conferindo se usuário já possui ação (para, se for o caso, apenas aumentar a quantidade)
+                        for(int j=0; j<usuarios_private[indice].get_acoes().first.size(); j++){
+                            if(usuarios_private[indice].get_acoes().first[j].getTicker() == ticker){
+                                usuarios_private[indice].set_qtd_acoes(ticker, qtd);
+                                possui_acao = true;
+                            }
+                        }
+                        if(!possui_acao){
+                            usuarios_private[indice].set_acoes(acoes[i], qtd);
+                            usuarios_private[indice].set_credito(usuarios_private[indice].get_credito() - acoes[i].getPreco()*qtd);
+                        }
                         cout << "Preço da ação " << acoes[i].getNome() << ": " << acoes[i].getPreco() << endl;
                         cout << "Quantidade comprada: " << qtd << endl;
                         cout << "Custo total: " << qtd*acoes[i].getPreco() << endl;
@@ -247,6 +316,9 @@ void BolsaDeValores::comprar_ativo(int indice){
                         cout << "Saldo insuficiente..." << endl;
                     }
                 }
+            }
+            if(!ativo_existe){
+                cout << "Esse ticker não pertence a nenhuma ativo..." << endl;
             }
             if(sucesso == true){
                 cout << "Lista de ações: " << endl;
@@ -262,7 +334,7 @@ void BolsaDeValores::comprar_ativo(int indice){
         else if(escolha == "2"){
             string ticker;
             int qtd;
-            bool sucesso = false;
+            bool sucesso = false, possui_titulo = false;
 
             system("clear");
             cout << "Digite o ticker do título que você deseja comprar: ";
@@ -273,9 +345,18 @@ void BolsaDeValores::comprar_ativo(int indice){
             for(int i=0; i<titulos.size(); i++){
                 if(ticker == titulos[i].getTicker()){
                     if(usuarios_private[indice].get_credito() >= qtd * titulos[i].getPreco()){
-                        usuarios_private[indice].set_titulo(titulos[i], qtd);
-                        usuarios_private[indice].set_credito(usuarios_private[indice].get_credito() - titulos[i].getPreco()*qtd);
-                        cout << "Preço da ação " << titulos[i].getNome() << ": " << titulos[i].getPreco() << endl;
+                        // Conferindo se usuário já possui o titulo (para, se for o caso, apenas aumentar a quantidade)
+                        for(int j=0; j<usuarios_private[indice].get_titulos().first.size(); j++){
+                            if(usuarios_private[indice].get_titulos().first[j].getTicker() == ticker){
+                                usuarios_private[indice].set_qtd_titulo(ticker, qtd);
+                                possui_titulo = true;
+                            }
+                        }
+                        if(!possui_titulo){
+                            usuarios_private[indice].set_titulo(titulos[i], qtd);
+                            usuarios_private[indice].set_credito(usuarios_private[indice].get_credito() - titulos[i].getPreco()*qtd);
+                        }
+                        cout << "Preço do título " << titulos[i].getNome() << ": " << titulos[i].getPreco() << endl;
                         cout << "Quantidade comprada: " << qtd << endl;
                         cout << "Custo total: " << qtd*titulos[i].getPreco() << endl;
                         cout << "Compra efetuada com sucesso!" << endl << endl;
@@ -323,6 +404,9 @@ void BolsaDeValores::comprar_ativo(int indice){
                 cin.get();
                 system("clear");
         }
+        else if(escolha == "5"){
+            system("clear");
+        }
         else{
             system("clear");
             cout << "Opção inválida..." << endl << endl;
@@ -332,26 +416,32 @@ void BolsaDeValores::comprar_ativo(int indice){
     
 }
 
+// Buscar por uma ação
 int BolsaDeValores::encontrar_acao(string ticker){
     for(int i=0; i<acoes.size(); i++){
         if(ticker == acoes[i].getTicker()){
+            // Retornar sua posição no vetor de ações, caso encontrada
             return i;
         }
     }
+     // Retornar -1 caso não encontrada
     return -1;
 
 }
 
+// Buscar por um titulo
 int BolsaDeValores::encontrar_titulo(string ticker){
     for(int i=0; i<titulos.size(); i++){
         if(ticker == titulos[i].getTicker()){
+            // Retornar sua posição no vetor de titulos, caso encontrada
             return i;
         }
     }
+    // Retornar -1 caso não encontrada
     return -1;
 }
 
-// Salvar titulos e acoes nos arquivos
+// Salvar titulos no arquivo
 void BolsaDeValores::salvarTitulos(){
      // Salvando dados dos titulos
     ofstream arquivo_titulos("titulos.txt");
@@ -366,6 +456,8 @@ void BolsaDeValores::salvarTitulos(){
     }
     arquivo_titulos.close();
 }
+
+// Salvar açoes no arquivo
 void BolsaDeValores::salvarAcoes(){
      // Salvando dados das acoes
     ofstream arquivo_acoes("acoes.txt");
@@ -381,31 +473,57 @@ void BolsaDeValores::salvarAcoes(){
     arquivo_acoes.close();
 }
 
+// Salvar titulos e ações de cada usuário nos arquivos
 void BolsaDeValores::salvar_ativos_usr(){
-    ofstream arquivo_usuarios("ativos_de_usuarios.txt");
-    if(arquivo_usuarios.is_open()){
+    // Salvar ações dos usuários
+    ofstream acoes_usuarios("acoes_de_usuarios.txt");
+    if(acoes_usuarios.is_open()){
+        // Para cada usuário private
         for(int i=0; i<usuarios_private.size(); i++){
-            arquivo_usuarios << i;
+            // Salvar primeiramente o índice do usuário
+            acoes_usuarios << i;
+            // Para cada ação que o usuário possuir, será salva o seu ticker e quantidade, separadas por vírgula (todas ações de um usuário na mesma linha)
             if(!usuarios_private[i].get_acoes().first.empty()){
                 for(int j=0; j<usuarios_private[i].get_acoes().first.size();j++){
-                    arquivo_usuarios << "," << usuarios_private[i].get_acoes().first[j].getTicker()
+                    // Salvar ticker e quantidade
+                    acoes_usuarios << "," << usuarios_private[i].get_acoes().first[j].getTicker()
                                     << "," << usuarios_private[i].get_acoes().second[j];
+                    //  Quando acabarem as ações de um usuário, pular uma linha para começar com o próximo
                     if(j == usuarios_private[i].get_acoes().first.size()-1){
-                        arquivo_usuarios << endl;
+                        acoes_usuarios << endl;
                     }
                 }
             }
             else{
-                arquivo_usuarios << endl;
+                acoes_usuarios << endl;
             }
         }
     }
-    arquivo_usuarios.close();
+    acoes_usuarios.close();
+    
+    // Salvar títulos dos usuários
+    // Mesma lógica de salvamento das ações
+    ofstream titulos_usuarios("titulos_de_usuarios.txt");
+    if(titulos_usuarios.is_open()){
+        for(int i=0; i<usuarios_private.size(); i++){
+            titulos_usuarios << i;
+            if(!usuarios_private[i].get_titulos().first.empty()){
+                for(int j=0; j<usuarios_private[i].get_titulos().first.size();j++){
+                    titulos_usuarios << "," << usuarios_private[i].get_titulos().first[j].getTicker()
+                                    << "," << usuarios_private[i].get_titulos().second[j];
+                    if(j == usuarios_private[i].get_titulos().first.size()-1){
+                        titulos_usuarios << endl;
+                    }
+                }
+            }
+            else{
+                titulos_usuarios << endl;
+            }
+        }
+    }
+    titulos_usuarios.close();
 }
 
 // Destrutor
 BolsaDeValores::~BolsaDeValores(){
-    //salvarAcoes();
-    //salvarTitulos();
-    //cout << "Dados salvos!" << endl;
 }

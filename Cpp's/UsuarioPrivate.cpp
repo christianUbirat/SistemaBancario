@@ -23,9 +23,24 @@ void UsuarioPrivate::set_acoes(Acao acao, int qtd){
     acoes_compradas.first.push_back(acao);
     acoes_compradas.second.push_back(qtd);
 }
+// Aumenta a quantiade de ações, conforme solicitado
+void UsuarioPrivate::set_qtd_acoes(string ticker, int qtd){
+    for(int i=0; i< get_acoes().first.size(); i++){
+        if(acoes_compradas.first[i].getTicker() == ticker){
+            acoes_compradas.second[i] = acoes_compradas.second[i] + qtd;
+        }
+    }
+}
 void UsuarioPrivate::set_titulo(Titulo titulo, int qtd){
     titulos_comprados.first.push_back(titulo);
     titulos_comprados.second.push_back(qtd);
+}
+void UsuarioPrivate::set_qtd_titulo(string ticker, int qtd){
+    for(int i=0; i< get_titulos().first.size(); i++){
+        if(titulos_comprados.first[i].getTicker() == ticker){
+            titulos_comprados.second[i] = titulos_comprados.second[i] + qtd;
+        }
+    }
 }
 
 //Destrutor

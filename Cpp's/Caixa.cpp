@@ -23,6 +23,7 @@ Caixa::Caixa( int local , int tipo ){
     Caixa.close();
 }
 
+//Este método é responsável pelo tratamento de erro da classe
 int Caixa::erro(string tentativa){
     int conversao;
     try{
@@ -35,7 +36,8 @@ int Caixa::erro(string tentativa){
     return conversao;
 }
 
-void Caixa::ler(void){ //Aqui o programa l� as contas salva no arquivo txt
+void Caixa::ler(void){ //Aqui o programa ler as contas salva no arquivo txt
+    //Caso o usuário que inicio a classe seja do tipo private
     if(tipo == 0){
         usuarios_private.clear();
         ifstream Usuario_private;
@@ -61,6 +63,7 @@ void Caixa::ler(void){ //Aqui o programa l� as contas salva no arquivo txt
         }
         Usuario_private.close();
     }else{
+        //Caso o usuário que inicio a classe seja do tipo padrão
         usuarios.clear();
         ifstream Usuario_arq;
         string nome, senha, numero_conta_temp, debito_temp, credito_temp, linha2;
@@ -85,13 +88,15 @@ void Caixa::ler(void){ //Aqui o programa l� as contas salva no arquivo txt
         }
         Usuario_arq.close();
     }
+    //caso tenha entrado sem nenhum usuário : em caso de test's
     if (usuarios_private.empty() && usuarios.empty())
         saldo = 0;
     else
+        //O Saldo é o credito do usuario
         ( tipo == 0 ) ? saldo = usuarios_private[local].get_credito() : saldo = usuarios[local].get_credito() ;
 }
 
-// Funcionalidades do caixa
+// Funcionalidades do caixa : para o gerente
 void Caixa::gerenciar(void){
     string opcao;
     do{
@@ -111,7 +116,7 @@ void Caixa::gerenciar(void){
     }while(opcao != "3");
 }
 
-// Funcionalidades do caixa
+// Funcionalidades do caixa : para os usuários
 void Caixa::menu(void){
     string opcao;
     do{
@@ -131,12 +136,14 @@ void Caixa::menu(void){
     }while(opcao != "3");
 }
 
+//Método de abastecer o Banco com dinheiro ,e cedulas
 void Caixa::abastecer(void){
     int grana;
     grana = proceso_abastecer();
     Qtd_dinheiro += grana;
 }
 
+//Método de depositar crédito na conta que no caso támbem aumenta a qtd de dinheiro no caixa e abstece de cedulas
 void Caixa::deposito(void){
     int grana;
     grana = proceso_abastecer();
@@ -152,6 +159,7 @@ void Caixa::deposito(void){
     ler();
 }
 
+//Verifica se as notas depositadas são válidas
 bool Caixa::existe(int dinheiros)const{
     if ( dinheiros == 100 || dinheiros == 50 || dinheiros == 20 || dinheiros == 10 || dinheiros == 5 || dinheiros == 2 )
         return true;
@@ -160,6 +168,7 @@ bool Caixa::existe(int dinheiros)const{
     return false;
 }
 
+//Aqui realizamos o processo geral de abastecer o caixa que pode ser tanto o deposito quanto o abastecer
 int Caixa::proceso_abastecer(void){
     system("cls");
     string montante_temp,valor_temp,quantidade_temp;
@@ -211,6 +220,7 @@ int Caixa::proceso_abastecer(void){
     return acumulado;
 }
 
+//Aqui recebemos o valor da remoção do dinheiro do caixa pelo gerente
 int Caixa::proceso_remocao(void){
     string montante_temp;
     int montante;
@@ -223,6 +233,7 @@ int Caixa::proceso_remocao(void){
     return montante;
 }
 
+//Aqui recebemos o valor do saque do dinheiro da conta do usuário
 void Caixa::ordenar(void){
     sort(notas.begin(),notas.end());
     vector<pair<int,int> >notas_auxiliar;
@@ -231,6 +242,7 @@ void Caixa::ordenar(void){
     notas.swap(notas_auxiliar);
 }
 
+//Aqui realizamos o processo geral de remoção de dinheiro do caixa que pode ser tanto o deposito quanto o abastecer
 void Caixa::proceso_aritmetrico_remocao(int grana){
     int quociente = 0, montante = 0,valor_nota,opcao;
     contabilizar();
@@ -287,6 +299,7 @@ void Caixa::proceso_aritmetrico_remocao(int grana){
     contabilizar();
 }
 
+//Neste método organizamos o vetor de pair(Notas) de forma que cada indice seja uma nota
 void Caixa::contabilizar(void){
     vector<pair<int,int> >notas_auxiliar;
     int ocorrencia = 0;
@@ -312,6 +325,7 @@ void Caixa::contabilizar(void){
     notas.swap(notas_auxiliar);
 }
 
+//Aqui juntamos todos os métodos auxiliares de remoção e adptamos para a remoção do gerente
 void Caixa::remover(void){
     int grana,quociente = 0, montante = 0,valor_nota,opcao;
     bool invalido;
@@ -328,6 +342,7 @@ void Caixa::remover(void){
         Qtd_dinheiro -= grana;
 }
 
+//Aqui juntamos todos os métodos auxiliares de remoção e adptamos para o saque do usuário
 void Caixa::saque(void){
     int grana;
     bool invalido;
