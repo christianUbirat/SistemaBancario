@@ -183,7 +183,7 @@ void BolsaDeValores::att_ativos_usuarios(){
                     }
                     if(!stop){
                         getline(ss, qtd_2, ',');
-                        qtd = stoi(qtd_2);
+                        qtd2 = stoi(qtd_2);
                         usuarios_private[indice2].set_titulo(titulos[encontrar_titulo(ticker2)], qtd2);
                         cont = 1;
                     }
