@@ -4,8 +4,6 @@
 
 ## Equipe:
 
-* Belchior Lamarck Farias Batista Gomes 
-
 * Christian Ubiratan da S. Barbosa Filho
 
 * Lucas Martins Bezerra 
