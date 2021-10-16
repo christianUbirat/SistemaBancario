@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-10-16T17:41:18.291Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36" etag="zRyXUNDGdQKDA0Rfz4vv" version="15.5.4" type="github">
+<mxfile host="app.diagrams.net" modified="2021-10-16T17:43:51.725Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36" etag="pAQMccppFspVQWz0602o" version="15.5.4" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="2306" dy="768" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
@@ -29,7 +29,7 @@
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--9" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="zkfFHV4jXpPFQw0GAbJ--6" vertex="1">
           <mxGeometry y="161" width="230" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="WfIN824oH0U3A9nc38dL-21" value="Banco()&#xa;&#xa;~Banco()&#xa;&#xa;SetSenhaAdm(string)&#xa;&#xa;GetSenhaAdm(string)&#xa;&#xa;Erro(string)&#xa;&#xa;Salvar()&#xa;&#xa;Menu()&#xa;&#xa;Historico()&#xa;&#xa;bool Login(int, string)&#xa;&#xa;CadastroUsuario(Usuario)&#xa;&#xa;CadastroUsuarioPrivate(UsuarioPrivate)&#xa;&#xa;Transferir(int, int, float)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="zkfFHV4jXpPFQw0GAbJ--6" vertex="1">
+        <mxCell id="WfIN824oH0U3A9nc38dL-21" value="Banco()&#xa;&#xa;~Banco()&#xa;&#xa;SetSenhaAdm(string)&#xa;&#xa;GetSenhaAdm(string)&#xa;&#xa;Erro(string)&#xa;&#xa;Salvar()&#xa;&#xa;Menu()&#xa;&#xa;Historico()&#xa;&#xa;pair&lt;int,int&gt; Login(int, string)&#xa;&#xa;CadastroUsuario(Usuario)&#xa;&#xa;CadastroUsuarioPrivate(UsuarioPrivate)&#xa;&#xa;Transferir(int, int, float)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="zkfFHV4jXpPFQw0GAbJ--6" vertex="1">
           <mxGeometry y="169" width="230" height="336" as="geometry" />
         </mxCell>
         <mxCell id="WfIN824oH0U3A9nc38dL-10" value="    Caixa" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
